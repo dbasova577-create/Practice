@@ -4,7 +4,7 @@ import pytest
 from calculator import calculator_hotel
 
 def load_cases():
-    with open('../04_price_calc_cases.json', 'r', encoding='utf-8') as file:
+    with open('04_price_calc_cases.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
         return data['cases']
 
