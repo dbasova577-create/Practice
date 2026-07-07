@@ -20,4 +20,3 @@ jobs:
 
       - name: Run tests with coverage
         run: pytest --cov=calculator
-
