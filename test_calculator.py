@@ -22,18 +22,22 @@ def test_calculator_succesful_cases(case):
     )
     assert result == expected
 
+@pytest.mark.parametrize('invalid_nights', [0,-1,-10])
+
+def test_night_error(invalid_nights):
+    with pytest.raises(ValueError, match='количество ночей должно быть больше 0'):
+        calculator_hotel(invalid_nights,5000,2,0,'AI',0)
 
 
-def test_night_error():
-    with pytest.raises(ValueError):
-        calculator_hotel(0,5000,2,0,'AI',0)
+@pytest.mark.parametrize('invalid_adults',[0,-1])
+
+def test_adults_error(invalid_adults):
+    with pytest.raises(ValueError, match='должен быть хотя бы один взрослый'):
+        calculator_hotel(4,3000,invalid_adults,0,'AI',0)
 
 
-def test_adults_error():
-    with pytest.raises(ValueError):
-        calculator_hotel(4,3000,0,0,'AI',0)
+@pytest.mark.parametrize('invalid_discount',[-0.1,1.1,2.0])
 
-
-def test_discount():
-    with pytest.raises(ValueError):
-        calculator_hotel(7, 4000,3,0,'AI',1.2)
+def test_discount(invalid_discount):
+    with pytest.raises(ValueError, match='скидка должна быть от 0 до 1'):
+        calculator_hotel(7, 4000,3,0,'AI',invalid_discount)
