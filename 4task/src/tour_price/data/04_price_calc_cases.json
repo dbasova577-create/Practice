@@ -1,5 +1,5 @@
 {
-  "pricing_rule": "total = round( nights * price_per_night_per_person * (adults + children * child_coef) * (1 - discount) ); child_coef = 0.5; результат в рублях, округление до целого",
+  "pricing_rule": "total = round(nights * price_per_night_per_person * (adults + children * child_coef) * (1 - discount)); child_coef = 0.5; результат в рублях, округление до целого по правилу ROUND_HALF_UP",
   "board_note": "board на итог в этом упрощённом кейсе не влияет — оставлен как входной параметр для расширения",
   "cases": [
     { "id": 1, "input": { "nights": 7,  "price_per_night_per_person": 5000, "adults": 2, "children": 0, "board": "AI",  "discount": 0.0  }, "expected_total": 70000  },
@@ -9,8 +9,12 @@
     { "id": 5, "input": { "nights": 7,  "price_per_night_per_person": 6200, "adults": 2, "children": 1, "board": "UAI", "discount": 0.05 }, "expected_total": 103075 }
   ],
   "edge_cases_to_cover": [
-    "nights = 0 или отрицательное — ошибка валидации",
-    "adults = 0 — ошибка (должен быть хотя бы 1 взрослый)",
-    "discount вне диапазона [0,1] — ошибка"
+    "nights <= 0 — ошибка валидации",
+    "adults <= 0 — ошибка валидации",
+    "children < 0 — ошибка валидации",
+    "price_per_night_per_person < 0 — ошибка валидации",
+    "discount вне диапазона [0,1] — ошибка валидации",
+    "денежная половина округляется вверх"
   ]
 }
+
