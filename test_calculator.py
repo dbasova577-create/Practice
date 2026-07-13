@@ -43,7 +43,7 @@ def test_discount(invalid_discount):
 
 @pytest.mark.parametrize('invalid_price', [-1, -5, -10])
 def test_price_error(invalid_price):
-    with pytest.raises(ValueError, match='стоимость ночи не может быть отрицательной'):
+    with pytest.raises(ValueError, match='цена за ночь не может быть отрицательной'):
         calculator_hotel(nights=7, price_per_night_per_person=invalid_price, adults=2, children=0, board='AI', discount=0)
 
 
